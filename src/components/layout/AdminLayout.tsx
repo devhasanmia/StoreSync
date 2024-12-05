@@ -13,7 +13,7 @@ const AdminLayout = () => {
       {/* Sidebar End*/}
       <div className="flex-1 flex flex-col">
         {/* Header */}
-        <header className="flex justify-between items-center  shadow p-4">
+        <header className="flex justify-between items-center p-4 shadow-sm">
           <button
             className="p-2 font-semibold text-1xl hover:text-green-500 focus:outline-none"
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -27,11 +27,9 @@ const AdminLayout = () => {
             </button>
           </div>
         </header>
-        <div className="flex-1 p-6 rounded-md bg-gray-50">
+        <div className="rounded-md bg-gray-50">
           {/* Main Content Start */}
-          <div className="p-3 bg-white rounded-lg min-h-screen">
             <Outlet />
-          </div>
           {/* Main Content End */}
         </div>
       </div>
