@@ -7,7 +7,7 @@ import Sidebar from "../sidebar/Sidebar";
 const AdminLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   return (
-    <div className="flex h-screen ">
+    <div className="flex min-h-screen ">
       {/* Sidebar Start*/}
       <Sidebar isSidebarOpen={isSidebarOpen} />
       {/* Sidebar End*/}
@@ -27,7 +27,7 @@ const AdminLayout = () => {
             </button>
           </div>
         </header>
-        <div className="rounded-md bg-gray-50">
+        <div className="rounded-md m-5 p-6">
           {/* Main Content Start */}
             <Outlet />
           {/* Main Content End */}
