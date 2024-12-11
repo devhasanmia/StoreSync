@@ -1,110 +1,269 @@
-const man = "/man.png";
+// import { Table, Button, Input, Select, Space } from "antd";
+// import { SearchOutlined } from "@ant-design/icons";
+// import man from "/man.png"; // Your image source
+
+// const { Option } = Select;
+
+// const Customer = () => {
+//   const data = [
+//     {
+//       key: 1,
+//       name: "Md. HASAN MIA",
+//       mobile: "01740398196",
+//       due: "50 BDT",
+//       photo: man,
+//     },
+//     {
+//       key: 2,
+//       name: "Md. HASAN MIA",
+//       mobile: "01740398196",
+//       due: "0 BDT",
+//       photo: man,
+//     },
+//   ];
+
+//   const columns = [
+//     {
+//       title: "#",
+//       dataIndex: "key",
+//       key: "key",
+//     },
+//     {
+//       title: "Photo",
+//       dataIndex: "photo",
+//       key: "photo",
+//       render: (text) => (
+//         <img
+//           src={text}
+//           alt="Customer"
+//           style={{ width: 40, height: 40, borderRadius: "50%" }}
+//         />
+//       ),
+//     },
+//     {
+//       title: "Name",
+//       dataIndex: "name",
+//       key: "name",
+//     },
+//     {
+//       title: "Mobile",
+//       dataIndex: "mobile",
+//       key: "mobile",
+//     },
+//     {
+//       title: "Due",
+//       dataIndex: "due",
+//       key: "due",
+//       render: (text) => (
+//         <span
+//           className={
+//             text.includes("BDT")
+//               ? text.includes("0 BDT")
+//                 ? "text-green-500"
+//                 : "text-red-500"
+//               : ""
+//           }
+//         >
+//           {text}
+//         </span>
+//       ),
+//     },
+//     {
+//       title: "Action",
+//       key: "action",
+//       render: () => (
+//         <Space size="middle">
+//           <Button
+//             type="primary"
+//             style={{ backgroundColor: "green", borderColor: "green" }}
+//           >
+//             View
+//           </Button>
+//           <Button
+//             type="primary"
+//             style={{ backgroundColor: "blue", borderColor: "blue" }}
+//           >
+//             Update
+//           </Button>
+//           <Button
+//             type="primary"
+//             style={{ backgroundColor: "red", borderColor: "red" }}
+//           >
+//             Delete
+//           </Button>
+//         </Space>
+//       ),
+//     },
+//   ];
+
+//   return (
+//     <div style={{ padding: 16 }}>
+//       {/* Header */}
+//       <header
+//         style={{
+//           marginBottom: 24,
+//           display: "flex",
+//           justifyContent: "space-between",
+//           alignItems: "center",
+//         }}
+//       >
+//         <h1 style={{ fontSize: "24px", fontWeight: "bold" }}>Customers</h1>
+//       </header>
+
+//       {/* Filters and Actions */}
+//       <div
+//         style={{
+//           display: "flex",
+//           justifyContent: "space-between",
+//           marginBottom: 24,
+//         }}
+//       >
+//         <div style={{ display: "flex", gap: 16 }}>
+//           <Button
+//             type="primary"
+//             style={{ backgroundColor: "green", borderColor: "green" }}
+//           >
+//             Add Customer
+//           </Button>
+//           <Select defaultValue="" style={{ width: 200 }}>
+//             <Option value="">All</Option>
+//             <Option value="due">Due</Option>
+//           </Select>
+//         </div>
+
+//         <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+//           <Input
+//             style={{ width: 200 }}
+//             placeholder="Search"
+//             prefix={<SearchOutlined />}
+//           />
+//           <Button
+//             type="primary"
+//             style={{ backgroundColor: "blue", borderColor: "blue" }}
+//           >
+//             Search
+//           </Button>
+//         </div>
+//       </div>
+
+//       {/* Table Section */}
+//       <div style={{ overflowX: "auto", maxWidth: "100%" }} id="customTable">
+
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Customer;
+
+import { Button } from "antd";
+import React from "react";
+
 const Customer = () => {
   return (
-    <div className="p-4 md:p-6 lg:p-8">
-      {/* Header */}
-      <header className="mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
-        <div className="text-center md:text-left">
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
-            Customers
-          </h1>
-        </div>
-      </header>
-
-      {/* Filters and Actions */}
-      <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 mb-6 justify-between">
-  {/* Left Section */}
-  <div className="flex flex-col md:flex-row items-center gap-4">
-    <button className="px-4 py-2 font-medium text-green-600 bg-green-50 border border-green-200 rounded-lg hover:bg-green-100 hover:text-green-700 transition duration-150 shadow-sm">
-      Add Customer
-    </button>
-    <select className="px-4 py-2 rounded-lg bg-blue-50 text-gray-700 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-100">
-      <option value="">All</option>
-      <option value="due">Due</option>
-    </select>
-  </div>
-
-  {/* Right Section */}
-  <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
-    <input
-      type="text"
-      className="flex-1 border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-100"
-      placeholder="Search"
-    />
-    <button className="py-2 px-4 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition duration-150 shadow-sm">
-      Search
-    </button>
-  </div>
-</div>
-
-
-      {/* Table Section */}
-      <div className="bg-white shadow rounded-lg overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm font-light">
-            <thead className="bg-blue-100 text-gray-800">
-              <tr>
-                <th className="px-6 py-4 font-medium">#</th>
-                <th className="px-6 py-4 font-medium">Photo</th>
-                <th className="px-6 py-4 font-medium">Name</th>
-                <th className="px-6 py-4 font-medium">Mobile</th>
-                <th className="px-6 py-4 font-medium">Due</th>
-                <th className="px-6 py-4 font-medium">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="odd:bg-white even:bg-gray-50 hover:bg-blue-50 transition-colors">
-                <td className="px-6 py-4 font-medium">1</td>
-                <td className="px-6 py-4">
-                  <img
-                    src={man}
-                    alt="Customer"
-                    className="w-10 h-10 rounded-full object-cover"
-                  />
-                </td>
-                <td className="px-6 py-4">Md. HASAN MIA</td>
-                <td className="px-6 py-4">01740398196</td>
-                <td className="px-6 py-4 text-red-500 font-bold">50 BDT</td>
-                <td className="px-6 py-4 flex gap-2">
-                  <button className="py-2 px-4 rounded-lg bg-green-500 text-white hover:bg-green-600 transition duration-150 shadow-sm">
-                    View
-                  </button>
-                  <button className="py-2 px-4 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition duration-150 shadow-sm">
-                    Update
-                  </button>
-                  <button className="py-2 px-4 rounded-lg bg-red-500 text-white hover:bg-red-600 transition duration-150 shadow-sm">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-              <tr className="odd:bg-white even:bg-gray-50 hover:bg-blue-50 transition-colors">
-                <td className="px-6 py-4 font-medium">1</td>
-                <td className="px-6 py-4">
-                  <img
-                    src={man}
-                    alt="Customer"
-                    className="w-10 h-10 rounded-full object-cover"
-                  />
-                </td>
-                <td className="px-6 py-4">Md. HASAN MIA</td>
-                <td className="px-6 py-4">01740398196</td>
-                <td className="px-6 py-4 text-green-500 font-bold">0 BDT</td>
-                <td className="px-6 py-4 flex gap-2">
-                  <button className="py-2 px-4 rounded-lg bg-green-500 text-white hover:bg-green-600 transition duration-150 shadow-sm">
-                    View
-                  </button>
-                  <button className="py-2 px-4 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition duration-150 shadow-sm">
-                    Update
-                  </button>
-                  <button className="py-2 px-4 rounded-lg bg-red-500 text-white hover:bg-red-600 transition duration-150 shadow-sm">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+    <div className="customTable">
+      <table className="table-auto">
+        <thead>
+          <tr>
+            <th>Song</th>
+            <th>Artist</th>
+            <th>Year</th>
+            <th>Action</th>
+            <th>Action</th>
+            <th>Action</th>
+            <th>Action</th>
+            <th>Action</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
+            <td>Malcolm Lockyer</td>
+            <td>1961</td>
+            <td>
+              <Button
+                type="primary"
+                style={{ backgroundColor: "green", borderColor: "green" }}
+              >
+                View
+              </Button>
+              <Button
+                type="primary"
+                style={{ backgroundColor: "blue", borderColor: "blue" }}
+              >
+                Update
+              </Button>
+              <Button
+                type="primary"
+                style={{ backgroundColor: "red", borderColor: "red" }}
+              >
+                Delete
+              </Button>
+            </td>
+            <td>
+              <Button
+                type="primary"
+                style={{ backgroundColor: "green", borderColor: "green" }}
+              >
+                View
+              </Button>
+              <Button
+                type="primary"
+                style={{ backgroundColor: "blue", borderColor: "blue" }}
+              >
+                Update
+              </Button>
+              <Button
+                type="primary"
+                style={{ backgroundColor: "red", borderColor: "red" }}
+              >
+                Delete
+              </Button>
+            </td>
+            <td>
+              <Button
+                type="primary"
+                style={{ backgroundColor: "green", borderColor: "green" }}
+              >
+                View
+              </Button>
+              <Button
+                type="primary"
+                style={{ backgroundColor: "blue", borderColor: "blue" }}
+              >
+                Update
+              </Button>
+              <Button
+                type="primary"
+                style={{ backgroundColor: "red", borderColor: "red" }}
+              >
+                Delete
+              </Button>
+            </td>
+            <td>
+              <Button
+                type="primary"
+                style={{ backgroundColor: "green", borderColor: "green" }}
+              >
+                View
+              </Button>
+              <Button
+                type="primary"
+                style={{ backgroundColor: "blue", borderColor: "blue" }}
+              >
+                Update
+              </Button>
+              <Button
+                type="primary"
+                style={{ backgroundColor: "red", borderColor: "red" }}
+              >
+                Delete
+              </Button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };

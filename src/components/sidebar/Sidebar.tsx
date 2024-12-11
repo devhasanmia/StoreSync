@@ -25,7 +25,7 @@ const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
     return (
         <div
             className={`${isSidebarOpen ? "w-64" : "w-16"
-                }  transition-all duration-300 flex flex-col shadow-lg `}
+                } bg-emerald-500 text-white transition-all duration-300 flex flex-col shadow-lg `}
         >
             <Link to={"/dashboard"}>
                 <div className="flex p-4 justify-start items-center">
@@ -39,7 +39,7 @@ const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
                     <li key={index} className="group">
                         <Link
                             to={item.link}
-                            className={`flex items-center p-4 hover:border-r-4 rounded-sm border-green-500  hover:bg-blue-50 transition-colors hover:text-green-500 cursor-pointer  ${!isSidebarOpen ? "justify-center" : ""
+                            className={`flex items-center p-4 hover:border-r-4 rounded-sm border-red-500  hover:bg-blue-50 transition-colors hover:text-green-500 cursor-pointer  ${!isSidebarOpen ? "justify-center" : ""
                                 }`}
                         >
                             <span className="text-xl">{item.icon}</span>
