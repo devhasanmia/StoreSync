@@ -1,8 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import AdminLayout from "../components/layout/AdminLayout";
 import Dashboard from "../pages/Dashboard";
-import Customer from "../pages/Customer";
-import Demo from "../pages/Demo";
+import CustomerList from "../pages/customers/CustomerList";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -17,8 +16,12 @@ const router = createBrowserRouter([
                 element: <Dashboard />
             },
             {
-                path: "customer",
-                element: <Customer/>
+                path: "customer-list",
+                element: <CustomerList/>
+            },
+            {
+                path: "customer-due",
+                element: <CustomerList/>
             }
         ]
     },

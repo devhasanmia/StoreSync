@@ -7,12 +7,12 @@ import Sidebar from "../sidebar/Sidebar";
 const AdminLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen overflow-hidden">
       {/* Sidebar */}
       <Sidebar isSidebarOpen={isSidebarOpen} />
       <div className="flex-1 flex flex-col">
         {/* Header */}
-        <header className="flex justify-between items-center p-4 shadow-sm">
+        <header className="flex justify-between items-center p-4 shadow-sm bg-gray-50">
           <button
             className="p-2 font-semibold text-1xl hover:text-green-500 focus:outline-none"
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -28,9 +28,11 @@ const AdminLayout = () => {
         </header>
 
         {/* Main Content Wrapper */}
-        <div>
+        <div className="m-5 rounded-md bg-gray-50">
           {/* Content */}
-          <Outlet />
+         <div className="m-2 bg-white">
+         <Outlet />
+         </div>
         </div>
       </div>
     </div>
