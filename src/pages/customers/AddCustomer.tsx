@@ -3,6 +3,7 @@ import SSInput from "../../components/ui/SSInput";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import PageTitle from "../../components/ui/PageTitle";
 
 const AddCustomer = () => {
   const customerSchema = z.object({
@@ -45,11 +46,10 @@ const AddCustomer = () => {
   };
 
   return (
-    <div className="p-5 bg-gray-50 rounded-lg">
+    <div>
+      <PageTitle title="Add Customer"/>
+      
       <div className="bg-white p-3 rounded-md ">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">Add Customer</h1>
-        </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <SSInput

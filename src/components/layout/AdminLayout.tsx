@@ -28,11 +28,12 @@ const AdminLayout = () => {
         </header>
 
         {/* Main Content Wrapper */}
-        <div className="m-5 rounded-md">
+        <div className="m-5 rounded-md p-5">
           {/* Content */}
-         <Outlet />
+          <div className="p-8 bg-[#f9fafb6b] rounded-lg">
+            <Outlet />
+          </div>
         </div>
-        
       </div>
     </div>
   );

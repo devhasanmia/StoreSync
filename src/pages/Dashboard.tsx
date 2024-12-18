@@ -1,10 +1,9 @@
+import PageTitle from "../components/ui/PageTitle";
+
 const Dashboard = () => {
   return (
     <div>
-      {/* Header */}
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-800">Today Summary</h1>
-      </header>
+    <PageTitle title="Dashboard"/>
 
       {/* Grid Layout */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
