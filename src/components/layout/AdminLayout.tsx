@@ -12,9 +12,9 @@ const AdminLayout = () => {
       <Sidebar isSidebarOpen={isSidebarOpen} />
       <div className="flex-1 flex flex-col">
         {/* Header */}
-        <header className="flex justify-between items-center p-4 shadow-sm bg-gray-50">
+        <header className="flex justify-between items-center p-4 shadow-sm bg-gray-900">
           <button
-            className="p-2 font-semibold text-1xl hover:text-green-500 focus:outline-none"
+            className="p-2 font-semibold text-1xl hover:text-green-500 text-white focus:outline-none"
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           >
             {isSidebarOpen ? <GoIssueReopened /> : <GoIssueOpened />}
@@ -28,12 +28,11 @@ const AdminLayout = () => {
         </header>
 
         {/* Main Content Wrapper */}
-        <div className="m-5 rounded-md bg-gray-50">
+        <div className="m-5 rounded-md">
           {/* Content */}
-         <div className="m-2 bg-white">
          <Outlet />
-         </div>
         </div>
+        
       </div>
     </div>
   );

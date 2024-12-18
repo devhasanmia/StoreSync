@@ -1,15 +1,18 @@
 import { useState } from "react";
-import { MdSpaceDashboard,MdMenuBook } from "react-icons/md";
-import { IoPeopleSharp,IoPersonAdd } from "react-icons/io5";
+import {MdMenuBook } from "react-icons/md";
+import { IoPeopleSharp } from "react-icons/io5";
+import { AiFillProduct } from "react-icons/ai";
 import { LuUserPlus } from "react-icons/lu";
-import { GoChecklist } from "react-icons/go";
+import { AiFillDashboard } from "react-icons/ai";
 import { MdManageAccounts } from "react-icons/md";
+import { LuSettings } from "react-icons/lu";
+import { TbReportAnalytics } from "react-icons/tb";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router";
 
 const items = [
   {
-    icon: <MdSpaceDashboard />,
+    icon: <AiFillDashboard />,
     label: "Dashboard",
     link: "/dashboard",
   },
@@ -22,28 +25,21 @@ const items = [
       { label: "Customer Due Report", icon: <MdMenuBook />, link: "/customer-due" },
     ],
   },
+ 
   {
-    icon: <IoPersonAdd />,
-    label: "More",
-    subItems: [
-      { label: "Reports", icon: <GoChecklist />, link: "/reports" },
-      { label: "Settings", icon: <GoChecklist />, link: "/settings" },
-      { label: "Logs", icon: <GoChecklist />, link: "/logs" },
-    ],
-  },
-  {
-    icon: <GoChecklist />,
+    icon: <AiFillProduct />,
     label: "Product",
     link: "/product",
   },
   {
-    icon: <IoPersonAdd />,
-    label: "More",
-    subItems: [
-      { label: "Reports", icon: <GoChecklist />, link: "/reports" },
-      { label: "Settings", icon: <GoChecklist />, link: "/settings" },
-      { label: "Logs", icon: <GoChecklist />, link: "/logs" },
-    ],
+    icon: <TbReportAnalytics />,
+    label: "Report",
+    link: "/report",
+  },
+  {
+    icon: <LuSettings />,
+    label: "Settings",
+    link: "/settings",
   },
 ];
 
@@ -61,8 +57,8 @@ const Sidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
       } bg-gray-900 transition-all duration-300 flex flex-col shadow-lg`}
     >
       <Link to={"/dashboard"}>
-        <div className="flex p-4 justify-start items-center">
-          <h1 className="font-bold text-2xl text-white">
+        <div className="flex p-4 justify-center items-center text-center">
+          <h1 className="font-bold text-2xl text-green-500 ">
             {isSidebarOpen ? "StoreSync" : "S.."}
           </h1>
         </div>
