@@ -1,10 +1,21 @@
+import { UseFormRegisterReturn } from "react-hook-form";
+
 type SSInputProps = {
   label: string;
   type: "submit" | "text" | "number";
   placeholder: string;
   required?: boolean;
+  register?: UseFormRegisterReturn;
+  error?: string; 
 };
-const SSInput = ({ label, type, placeholder, required }: SSInputProps) => {
+const SSInput = ({
+  label,
+  type,
+  placeholder,
+  required,
+  register,
+  error
+}: SSInputProps) => {
   return (
     <div>
       <label className="block text-sm font-medium text-gray-600 mb-2 gap-2">
@@ -17,9 +28,11 @@ const SSInput = ({ label, type, placeholder, required }: SSInputProps) => {
       </label>
       <input
         type={type}
+        {...register}
         placeholder={placeholder}
-        className="border rounded-lg p-3 w-full focus:outline-none focus:ring-1 focus:ring-green-500"
+        className={`border rounded-lg p-3 w-full focus:outline-none focus:ring-1 ${error ? "focus:ring-red-500" :"focus:ring-green-500"} ${error && 'border-red-500'}`}
       />
+      {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
     </div>
   );
 };
