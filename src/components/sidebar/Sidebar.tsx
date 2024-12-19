@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {MdMenuBook } from "react-icons/md";
+import { MdMenuBook } from "react-icons/md";
 import { IoPeopleSharp } from "react-icons/io5";
 import { AiFillProduct } from "react-icons/ai";
 import { LuUserPlus } from "react-icons/lu";
@@ -7,6 +7,10 @@ import { AiFillDashboard } from "react-icons/ai";
 import { MdManageAccounts } from "react-icons/md";
 import { LuSettings } from "react-icons/lu";
 import { TbReportAnalytics } from "react-icons/tb";
+import { IoBagAdd } from "react-icons/io5";
+import { HiSquare3Stack3D } from "react-icons/hi2";
+import { MdOutlineWorkspacePremium } from "react-icons/md";
+import { ImQrcode } from "react-icons/im";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router";
 
@@ -17,20 +21,60 @@ const items = [
     link: "/dashboard",
   },
   {
+    icon: <AiFillDashboard />,
+    label: "Sale",
+    link: "/dashboard",
+  },
+  {
+    icon: <AiFillProduct />,
+    label: "Product Management",
+    subItems: [
+      { label: "Add Product", icon: <IoBagAdd />, link: "/add-product" },
+      {
+        label: "Product List",
+        icon: <HiSquare3Stack3D />,
+        link: "/product-list",
+      },
+      {
+        label: "Print Labels",
+        icon: <ImQrcode />,
+        link: "/print-labels",
+      },
+      {
+        label: "Trending Product",
+        icon: <MdOutlineWorkspacePremium />,
+        link: "/print-labels",
+      },
+    ],
+  },
+  {
     icon: <MdManageAccounts />,
     label: "Customer Management",
     subItems: [
       { label: "Add Customer", icon: <LuUserPlus />, link: "/add-customer" },
-      { label: "Customer List", icon: <IoPeopleSharp />, link: "/customer-list" },
-      { label: "Customer Due Report", icon: <MdMenuBook />, link: "/customer-due" },
+      {
+        label: "Customer List",
+        icon: <IoPeopleSharp />,
+        link: "/customer-list",
+      },
+      {
+        label: "Customer Due Report",
+        icon: <MdMenuBook />,
+        link: "/customer-due",
+      },
     ],
   },
- 
   {
-    icon: <AiFillProduct />,
-    label: "Product",
-    link: "/product",
+    label: "Categories",
+    icon: <HiSquare3Stack3D />,
+    link: "/product-list",
   },
+  {
+    label: "Brands",
+    icon: <HiSquare3Stack3D />,
+    link: "/product-list",
+  },
+  
   {
     icon: <TbReportAnalytics />,
     label: "Report",

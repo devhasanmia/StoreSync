@@ -2,8 +2,8 @@ import { UseFormRegisterReturn } from "react-hook-form";
 
 type SSInputProps = {
   label: string;
-  type: "submit" | "text" | "number";
-  placeholder: string;
+  type: "submit" | "text" | "number" | "email" | "password" | "file";
+  placeholder?: string;
   required?: boolean;
   register?: UseFormRegisterReturn;
   error?: string; 

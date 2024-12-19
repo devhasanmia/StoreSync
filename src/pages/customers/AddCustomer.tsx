@@ -48,7 +48,6 @@ const AddCustomer = () => {
   return (
     <div>
       <PageTitle title="Add Customer"/>
-      
       <div className="bg-white p-3 rounded-md ">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

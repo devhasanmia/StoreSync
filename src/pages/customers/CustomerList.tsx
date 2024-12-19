@@ -48,7 +48,7 @@ const CustomerList = () => {
       email: "rahim@gmail.com",
       mobile: "01740398197",
       address: "Kanchanpur",
-      due: 50,
+      due: 0,
     },
     {
       key: "3",
@@ -108,8 +108,16 @@ const CustomerList = () => {
                   <td className="py-2 px-4 border-b border-green-100">
                     {record.address}
                   </td>
-                  <td className="py-2 px-4 border-b border-green-100 text-red-500 font-semibold">
-                    {record.due} BDT
+                  <td className="py-2 px-4 border-b border-green-100 font-semibold">
+                    <span
+                      className={`px-3 py-1 text-white rounded-lg ${
+                        record.due > 0
+                          ? "bg-red-500 text-white"
+                          : "bg-green-100 text-green-500"
+                      }`}
+                    >
+                      {record.due > 0 ? `${record.due} BDT` : "PAID"}
+                    </span>
                   </td>
                   <td className="py-2 px-4 border-b border-green-100">
                     {renderActions(record)}
