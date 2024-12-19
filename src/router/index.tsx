@@ -4,6 +4,7 @@ import Dashboard from "../pages/Dashboard";
 import CustomerList from "../pages/customers/CustomerList";
 import AddCustomer from "../pages/customers/AddCustomer";
 import Settings from "../pages/settings/Settings";
+import Report from "../pages/Report";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
             {
                 path: "customer-due",
                 element: <CustomerList/>
+            },
+            {
+                path: "report",
+                element: <Report/>
             },
             {
                 path: "settings",
