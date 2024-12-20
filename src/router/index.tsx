@@ -6,6 +6,8 @@ import AddCustomer from "../pages/customers/AddCustomer";
 import Settings from "../pages/settings/Settings";
 import Report from "../pages/Report";
 import AddProduct from "../pages/products/AddProduct";
+import ProductList from "../pages/products/ProductList";
+import PrintLabels from "../pages/products/PrintLabels";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -34,6 +36,14 @@ const router = createBrowserRouter([
             {
                 path: "add-product",
                 element: <AddProduct/>
+            },
+            {
+                path: "product-list",
+                element: <ProductList/>
+            },
+            {
+                path: "print-labels",
+                element: <PrintLabels/>
             },
             {
                 path: "report",
