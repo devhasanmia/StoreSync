@@ -1,50 +1,28 @@
-import { z } from "zod";
 import SSInput from "../../components/ui/SSInput";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import PageTitle from "../../components/ui/PageTitle";
+import { customerValidation } from "../../validations/customerValidation";
+import SSSelect from "../../components/ui/SSSelect";
 
 const AddCustomer = () => {
-  const customerSchema = z.object({
-    name: z.string().min(1, "Name is required"),
-    email: z.string().email("Invalid email address").optional(),
-    mobile: z
-      .string()
-      .min(11, "Mobile number must be 11 digits")
-      .max(11, "Mobile number must be 11 digits")
-      .optional(),
-    address: z.string().min(1, "Address is required"),
-    nid: z
-      .string({
-        invalid_type_error: "Invalid NID number",
-      })
-      .optional(),
-    previousDue: z.string().optional(),
-  });
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
   } = useForm({
-    resolver: zodResolver(customerSchema),
+    resolver: zodResolver(customerValidation),
   });
-  const previousDue = watch("previousDue");
   const onSubmit = (data: any) => {
-    const previousDueNumber = Number(previousDue) || 0;
     const customerData = {
       ...data,
-      previousDue: previousDueNumber,
+      due: data.due || 0,
+      balance: data.balance || 0,
     };
-    try {
-      toast.success("Customer added successfully.");
-      console.log(customerData);
-    } catch (error) {
-      toast.error("Failed to add customer. Please try again.");
-    }
+    console.log("Customer Data:", customerData);
+    toast.success("Customer added successfully");
   };
-
   return (
     <div>
       <PageTitle title="Add Customer"/>
@@ -82,22 +60,49 @@ const AddCustomer = () => {
               register={register("address")}
               error={errors.address?.message as string}
             />
+            <SSSelect label="Gender" options={[{
+              label:"Male",
+              "value":"Male"
+            },{
+              label:"Female",
+              value: "Female"
+            },{
+              label:"Other",
+              value: "Other"
+            }]} required register={register("gender")}/>
             <SSInput
               label="NID"
               placeholder="NID"
               type="number"
               register={register("nid")}
+              error={errors.nid?.message as string}
             />
+            <SSInput
+              label="Date of Birth"
+              placeholder="Date of Birth"
+              type="date"
+              register={register("dob")}
+              error={errors.dob?.message as string}
+              />
+
             <SSInput
               label="Previous Due"
               placeholder="Previous Due"
               type="number"
-              register={register("previousDue")}
+              register={register("due")}
+              error={errors.due?.message as string}
             />
+            <SSInput
+              label="Balance"
+              placeholder="Balance"
+              type="number"
+              register={register("balance")}
+              error={errors.balance?.message as string}
+              />
           </div>
           {/* Submit Button */}
           <div className="mt-5">
-            <button className="w-full  py-3 px-6 bg-green-500 text-white rounded-md shadow-md hover:bg-green-600 focus:outline-none transition font-semibold">
+            <button type="submit" className="w-full  py-3 px-6 bg-green-500 text-white rounded-md shadow-md hover:bg-green-600 focus:outline-none transition font-semibold">
               Add Customer
             </button>
           </div>
