@@ -5,20 +5,7 @@ const CustomerList = () => {
   const renderActions = (record: any) => {
     return (
       <div className="flex gap-2">
-        <button
-          className="px-3 py-1 text-white bg-blue-500 rounded-md hover:bg-blue-600"
-          aria-label={`View details of ${record.name}`}
-        >
-          View
-        </button>
-        <button
-          className="px-3 py-1 text-white bg-yellow-500 rounded-md hover:bg-yellow-600"
-          aria-label={`Edit details of ${record.name}`}
-        >
-          Edit
-        </button>
         <div>
-          <div></div>
         </div>
         <SSModal
           title="Custom Modal Titles"
@@ -29,13 +16,6 @@ const CustomerList = () => {
             </p>
           }
         />
-        <button
-          disabled
-          className="px-3 py-1 text-white bg-green-500 rounded-md hover:bg-green-600 disabled:opacity-50"
-          aria-label={`Make a payment for ${record.name}`}
-        >
-          Payment
-        </button>
         <button
           className="px-3 py-1 text-white bg-red-500 rounded-md hover:bg-red-600"
           aria-label={`Delete record of ${record.name}`}
@@ -97,8 +77,6 @@ const CustomerList = () => {
               <tr className="bg-[#22c55e0f] rounded-lg text-left font-semibold">
                 <th className="py-2 px-4 border-b">Name</th>
                 <th className="py-2 px-4 border-b">Mobile</th>
-                <th className="py-2 px-4 border-b">Email</th>
-                <th className="py-2 px-4 border-b">Address</th>
                 <th className="py-2 px-4 border-b">Due</th>
                 <th className="py-2 px-4 border-b">Actions</th>
               </tr>
@@ -115,12 +93,8 @@ const CustomerList = () => {
                   <td className="py-2 px-4 border-b border-green-100">
                     {record.mobile}
                   </td>
-                  <td className="py-2 px-4 border-b border-green-100">
-                    {record.email}
-                  </td>
-                  <td className="py-2 px-4 border-b border-green-100">
-                    {record.address}
-                  </td>
+                  
+                 
                   <td className="py-2 px-4 border-b border-green-100 font-semibold">
                     <span
                       className={`px-3 py-1 text-white rounded-lg ${

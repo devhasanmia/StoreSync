@@ -5,24 +5,37 @@ import { toast } from "sonner";
 import PageTitle from "../../components/ui/PageTitle";
 import { customerValidation } from "../../validations/customerValidation";
 import SSSelect from "../../components/ui/SSSelect";
+import { useAddCustomerMutation } from "../../redux/api/baseApi";
 
 const AddCustomer = () => {
+
+  const [addCustomer, { isLoading}] = useAddCustomerMutation();
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(customerValidation),
   });
-  const onSubmit = (data: any) => {
-    const customerData = {
-      ...data,
-      due: data.due || 0,
-      balance: data.balance || 0,
-    };
-    console.log("Customer Data:", customerData);
-    toast.success("Customer added successfully");
+
+  const onSubmit = async (data: any) => {
+    try {
+      const customerData = {
+        ...data,
+        due: data.due ?? 0,
+        balance: data.balance ?? 0,
+      };
+      const customer = await addCustomer(customerData).unwrap();
+      reset();
+      toast.success(customer.message || "New Customer Added Successfully");
+    } catch (error: any) {
+      toast.error(error.data.message);
+    }
   };
+
+
   return (
     <div>
       <PageTitle title="Add Customer"/>
@@ -99,11 +112,17 @@ const AddCustomer = () => {
               register={register("balance")}
               error={errors.balance?.message as string}
               />
+            <SSInput
+              label="Photo"
+              type="file"
+              register={register("photo")}
+              error={errors.photo?.message as string}
+              />
           </div>
           {/* Submit Button */}
           <div className="mt-5">
-            <button type="submit" className="w-full  py-3 px-6 bg-green-500 text-white rounded-md shadow-md hover:bg-green-600 focus:outline-none transition font-semibold">
-              Add Customer
+            <button type="submit" disabled={isLoading} className="w-full  py-3 px-6 bg-green-500 text-white rounded-md shadow-md hover:bg-green-600 focus:outline-none transition font-semibold">
+              {isLoading ? "Please Wait" : "Add Customer"}
             </button>
           </div>
         </form>

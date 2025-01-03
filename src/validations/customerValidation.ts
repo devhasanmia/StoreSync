@@ -31,13 +31,14 @@ export const customerValidation = z.object({
     .email("Invalid email format")
     .optional(),
   nid: z
+    .string()
+    .optional()
+    .refine(val => !val || /^\d+(\.\d+)?$/.test(val), {
+      message: "NID must be a valid number"
+    }).transform(val => (val ? parseFloat(val) : 0)),
+  dob: z
     .string({
-      invalid_type_error: "NID must be a string"
-    })
-    .optional(),
-    dob: z
-    .string({
-      invalid_type_error: "DOB must be a string",
+      invalid_type_error: "DOB must be a string"
     })
     .optional(),
   due: z
