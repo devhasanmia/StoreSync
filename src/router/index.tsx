@@ -8,6 +8,7 @@ import Report from "../pages/Report";
 import AddProduct from "../pages/products/AddProduct";
 import ProductList from "../pages/products/ProductList";
 import PrintLabels from "../pages/products/PrintLabels";
+import CategoryManagement from "../pages/categories/CategoryManagement";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
             {
                 path: "add-product",
                 element: <AddProduct/>
+            },
+            {
+                path: "category-management",
+                element: <CategoryManagement/>
             },
             {
                 path: "product-list",

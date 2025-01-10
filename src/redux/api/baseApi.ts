@@ -10,8 +10,20 @@ export const baseApi = createApi({
             method: 'POST',
             body,
         }),
+    }),
+    getCustomers: builder.query({
+      query: () => ({
+        url: '/customer/get-customers',
+        method: 'GET',
+      }),
+    }),
+    getCategories: builder.query({
+      query: () => ({
+        url:"/category/get-categories",
+        method: "GET"
+      })
     })
   }),
 })
 
-export const {useAddCustomerMutation} = baseApi
+export const {useAddCustomerMutation, useGetCustomersQuery, useGetCategoriesQuery} = baseApi

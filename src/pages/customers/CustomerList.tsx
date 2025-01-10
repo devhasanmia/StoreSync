@@ -1,7 +1,11 @@
 import PageTitle from "../../components/ui/PageTitle";
 import SSModal from "../../components/ui/SSModal";
+import { useGetCustomersQuery } from "../../redux/api/baseApi";
 
 const CustomerList = () => {
+const {data: customersData, isLoading} = useGetCustomersQuery("");
+
+
   const renderActions = (record: any) => {
     return (
       <div className="flex gap-2">
@@ -11,8 +15,7 @@ const CustomerList = () => {
           title="Custom Modal Titles"
           content={
             <p>
-              This is dynamic modal content. You can include any content you want.
-              For example, you can display a form to make a payment.
+              {customersData?.data?.map((item)=> <li>{item.balance}</li>)}
             </p>
           }
         />
@@ -26,33 +29,6 @@ const CustomerList = () => {
     );
   };
 
-  const data = [
-    {
-      key: "1",
-      name: "MD. HASAN MIA",
-      email: "hasan@gmail.com",
-      mobile: "01740398196",
-      address: "Chandrapur",
-      due: 20,
-    },
-    {
-      key: "2",
-      name: "MD. RAHIM UDDIN",
-      email: "rahim@gmail.com",
-      mobile: "01740398197",
-      address: "Kanchanpur",
-      due: 0,
-    },
-    {
-      key: "3",
-      name: "MD. KARIM ALI",
-      email: "karim@gmail.com",
-      mobile: "01740398198",
-      address: "Mohammadpur",
-      due: 100,
-    },
-  ];
-
   return (
     <div>
       <div className="">
@@ -65,24 +41,22 @@ const CustomerList = () => {
             placeholder="Search by name, email, mobile..."
           />
 
-          <select className="w-full md:w-48 px-3 py-2 rounded-md border border-green-100  focus:outline-none">
-            <option value="All">All</option>
-            <option value="Due">Due</option>
-          </select>
+          
         </div>
 
         <div>
-          <table className="min-w-full   rounded-lg p-5">
-            <thead className=" text-green-500 h-16 rounded-2xl">
+          <table className="min-w-full rounded-lg p-5">
+            <thead className="text-green-500 h-16 rounded-2xl">
               <tr className="bg-[#22c55e0f] rounded-lg text-left font-semibold">
                 <th className="py-2 px-4 border-b">Name</th>
                 <th className="py-2 px-4 border-b">Mobile</th>
-                <th className="py-2 px-4 border-b">Due</th>
+                <th className="py-2 px-4 border-b">Payment Status</th>
                 <th className="py-2 px-4 border-b">Actions</th>
               </tr>
             </thead>
+            
             <tbody className="font-medium">
-              {data.map((record) => (
+              {customersData?.data?.map((record) => (
                 <tr
                   key={record.key}
                   className="hover:bg-gray-50 border-green-100"
@@ -100,10 +74,10 @@ const CustomerList = () => {
                       className={`px-3 py-1 text-white rounded-lg ${
                         record.due > 0
                           ? "bg-red-500 text-white"
-                          : "bg-green-100 text-green-500"
+                          : "bg-green-500 text-white-500"
                       }`}
                     >
-                      {record.due > 0 ? `${record.due} BDT` : "PAID"}
+                      {record.due > 0 ? `${record.due} Taka Due` : "PAID"}
                     </span>
                   </td>
                   <td className="py-2 px-4 border-b border-green-100">

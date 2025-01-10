@@ -1,8 +1,19 @@
 import PageTitle from "../../components/ui/PageTitle";
 import SSInput from "../../components/ui/SSInput";
 import SSSelect from "../../components/ui/SSSelect";
+import { useGetCategoriesQuery } from "../../redux/api/baseApi";
 
-const AddProduct = () => {
+const AddProduct =  () => {
+  const {data, isLoading} =  useGetCategoriesQuery("");
+  
+  const categoryOptions = isLoading
+  ? []
+  : data?.data?.map((cat: any) => ({
+      label: cat.name,
+      value: cat.id,
+    })) || [];
+
+
   return (
     <div>
       <PageTitle title="Add Product" />
@@ -31,19 +42,12 @@ const AddProduct = () => {
               ]}
               required
             />
-            <SSSelect
+          <SSSelect
               label="Category"
-              options={[
-                { label: "Electronics", value: "electronics" },
-                { label: "Clothing", value: "clothing" },
-                { label: "Books", value: "books" },
-                { label: "Home & Furniture", value: "home-furniture" },
-                { label: "Others", value: "others" },
-              ]}
+              options= {categoryOptions}
               required
-              //   register={register("price")}
-              //   error={errors.price?.message as string}
-              />
+            />
+
             <SSInput label="Photo" type="file"/>
             <SSSelect label="Unit" options={[
                 { label: "Piece", value: "piece" },
@@ -56,22 +60,6 @@ const AddProduct = () => {
                 { label: "Bag", value: "bag" },
                 { label: "Unit", value: "unit" },
             ]} required/>
-            {/* <SSInput
-              label="Purchase Price"
-              placeholder="Purchase Price"
-              type="number"
-              required
-              //   register={register("price")}
-              //   error={errors.price?.message as string}
-            />
-            <SSInput
-              label="Sale Price"
-              placeholder="Sale Price"
-              type="number"
-              required
-              //   register={register("price")}
-              //   error={errors.price?.message as string}
-            /> */}
           </div>
 
           {/* Submit Button */}

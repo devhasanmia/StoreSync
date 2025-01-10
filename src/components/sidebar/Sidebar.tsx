@@ -10,6 +10,7 @@ import { TbReportAnalytics } from "react-icons/tb";
 import { IoBagAdd } from "react-icons/io5";
 import { HiSquare3Stack3D } from "react-icons/hi2";
 import { MdOutlineWorkspacePremium } from "react-icons/md";
+import { HiOutlineClipboardDocumentList } from "react-icons/hi2";
 import { ImQrcode } from "react-icons/im";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router";
@@ -66,8 +67,8 @@ const items = [
   },
   {
     label: "Categories",
-    icon: <HiSquare3Stack3D />,
-    link: "/product-list",
+    icon: <HiOutlineClipboardDocumentList />,
+    link: "/category-management",
   },
   {
     label: "Brands",
