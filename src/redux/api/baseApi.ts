@@ -22,8 +22,15 @@ export const baseApi = createApi({
         url:"/category/get-categories",
         method: "GET"
       })
+    }),
+    addCategory: builder.mutation({
+      query: (data) => ({
+        url:"/category/add-category",
+        method: "POST",
+        body: data
+      })
     })
   }),
 })
 
-export const {useAddCustomerMutation, useGetCustomersQuery, useGetCategoriesQuery} = baseApi
+export const {useAddCustomerMutation, useGetCustomersQuery, useGetCategoriesQuery, useAddCategoryMutation} = baseApi
