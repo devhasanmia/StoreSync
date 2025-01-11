@@ -1,7 +1,7 @@
 import { FiEdit, FiTrash } from "react-icons/fi";
 import { IoMdAddCircle } from "react-icons/io";
 import PageTitle from "../../components/ui/PageTitle";
-import { useAddCategoryMutation, useGetCategoriesQuery } from "../../redux/api/baseApi";
+import { useAddCategoryMutation, useDeleteCategoryMutation, useGetCategoriesQuery } from "../../redux/api/baseApi";
 import SSModal from "../../components/ui/SSModal";
 import SSInput from "../../components/ui/SSInput";
 import { useForm } from "react-hook-form";
@@ -11,8 +11,8 @@ import { z } from "zod";
 
 const CategoryManagement = () => {
   const { data, isLoading } = useGetCategoriesQuery("");
-  const [addCategory, {isLoading:categoryLo}] = useAddCategoryMutation();
-
+  const [addCategory, { isLoading: categoryLo }] = useAddCategoryMutation();
+  const [deleteCategory] = useDeleteCategoryMutation()
   const categoryValidation = z.object({
     name: z
       .string({
@@ -32,12 +32,13 @@ const CategoryManagement = () => {
 
   const onSubmit = async (data: any) => {
     try {
-    const category = await addCategory(data).unwrap();
+      const category = await addCategory(data).unwrap();
       toast.success(category.message)
     } catch (error: any) {
       toast.error(error.data.errorSources[0].message);
-    } 
+    }
   };
+
   return (
     <div>
       {/* Page Title */}
@@ -75,7 +76,7 @@ const CategoryManagement = () => {
         {data?.data?.map((category: any) => (
           <div
             key={category._id}
-            className="bg-[#22c55e0f] rounded-lg text-left font-semibold rounded-lg p-4 flex flex-col justify-between"
+            className="bg-[#22c55e0f] text-left font-semibold rounded-lg p-4 flex flex-col justify-between"
           >
             {/* Category Info */}
             <div>
@@ -95,6 +96,7 @@ const CategoryManagement = () => {
               </button>
               <button
                 className="flex items-center gap-2 px-4 py-2 bg-red-500 text-white text-sm font-medium rounded-lg hover:bg-red-600 transition"
+                onClick={async () => await deleteCategory(category._id)}
               >
                 <FiTrash />
                 Delete
