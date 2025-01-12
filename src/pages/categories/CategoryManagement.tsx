@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { z } from "zod";
-
+import { format } from 'date-fns';
 const CategoryManagement = () => {
   const { data, isLoading } = useGetCategoriesQuery("");
   const [addCategory, { isLoading: categoryLo }] = useAddCategoryMutation();
@@ -34,6 +34,7 @@ const CategoryManagement = () => {
     try {
       const category = await addCategory(data).unwrap();
       toast.success(category.message)
+      reset()
     } catch (error: any) {
       toast.error(error.data.errorSources[0].message);
     }
@@ -83,11 +84,34 @@ const CategoryManagement = () => {
               <h3 className=" text-green-500 h-10 rounded-2xl">
                 {category.name}
               </h3>
+              <p>Last Update: {format(new Date(category.createdAt), 'dd MMM yyyy')}</p>
 
             </div>
 
             {/* Action Buttons */}
             <div className="flex gap-3 mt-4">
+              <SSModal content={<div className="bg-white p-3 rounded-md ">
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-4">
+                    <SSInput
+                      label="Category Name"
+                      placeholder="Category Name"
+                      type="text"
+                      required
+                      value={"sdfd"}
+                      register={register("name")}
+                      error={errors.name?.message as string}
+                    />
+                  </div>
+                  {/* Submit Button */}
+                  <div className="mt-5">
+                    <button type="submit" disabled={categoryLo} className="w-full  py-3 px-6 bg-green-500 text-white rounded-md shadow-md hover:bg-green-600 focus:outline-none transition font-semibold">
+                      {categoryLo ? "Please Wait" : "Add Customer"}
+                    </button>
+                  </div>
+                </form>
+              </div>} title="Add Category" btnName="Add Category" icon={<IoMdAddCircle />} />
+
               <button
                 className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition"
               >
