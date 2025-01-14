@@ -7,20 +7,17 @@ import SSInput from "../../components/ui/SSInput";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { z } from "zod";
 import { format } from 'date-fns';
+import { categoryValidation } from "../../validations/categoryValidation";
+import SSButton from "../../components/ui/SSButton";
+import { FaEdit } from "react-icons/fa";
+import { Popconfirm } from 'antd';
 const CategoryManagement = () => {
-  const { data, isLoading } = useGetCategoriesQuery("");
-  const [addCategory, { isLoading: categoryLo }] = useAddCategoryMutation();
+
+  const { data } = useGetCategoriesQuery("");
+  const [addCategory, { isLoading: isCategoryLoading }] = useAddCategoryMutation();
   const [deleteCategory] = useDeleteCategoryMutation()
-  const categoryValidation = z.object({
-    name: z
-      .string({
-        required_error: "Category Name is required",
-        invalid_type_error: "Category Name Must be a string"
-      })
-      .min(3, "Category Name must be at least 3 characters")
-  })
+
   const {
     register,
     handleSubmit,
@@ -42,15 +39,20 @@ const CategoryManagement = () => {
 
   return (
     <div>
-      {/* Page Title */}
+      {/* Page Title Start*/}
       <PageTitle title="Category Management" />
+      {/* Page Title End*/}
+
       <div className="flex flex-col md:flex-row gap-4 md:gap-6 justify-between mb-2">
+        {/* Search Input Start */}
         <input
           type="text"
           className="w-full md:w-80 px-3 py-2 rounded-md border border-green-100 focus:outline-none"
-          placeholder="Search by name, email, mobile..."
+          placeholder="Search here..."
         />
-        <SSModal content={<div className="bg-white p-3 rounded-md ">
+        {/* Search Input End */}
+
+        <SSModal content={<div className="p-5 rounded-md ">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-4">
               <SSInput
@@ -63,11 +65,7 @@ const CategoryManagement = () => {
               />
             </div>
             {/* Submit Button */}
-            <div className="mt-5">
-              <button type="submit" disabled={categoryLo} className="w-full  py-3 px-6 bg-green-500 text-white rounded-md shadow-md hover:bg-green-600 focus:outline-none transition font-semibold">
-                {categoryLo ? "Please Wait" : "Add Customer"}
-              </button>
-            </div>
+            <SSButton text="Add Category" type="submit" disabled={isCategoryLoading} />
           </form>
         </div>} title="Add Category" btnName="Add Category" icon={<IoMdAddCircle />} />
       </div>
@@ -79,52 +77,45 @@ const CategoryManagement = () => {
             key={category._id}
             className="bg-[#22c55e0f] text-left font-semibold rounded-lg p-4 flex flex-col justify-between"
           >
-            {/* Category Info */}
             <div>
               <h3 className=" text-green-500 h-10 rounded-2xl">
                 {category.name}
               </h3>
               <p>Last Update: {format(new Date(category.createdAt), 'dd MMM yyyy')}</p>
-
             </div>
 
             {/* Action Buttons */}
             <div className="flex gap-3 mt-4">
-              <SSModal content={<div className="bg-white p-3 rounded-md ">
+              <SSModal content={<div className="p-5 rounded-md ">
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-4">
-                    <SSInput
-                      label="Category Name"
-                      placeholder="Category Name"
-                      type="text"
-                      required
-                      value={"sdfd"}
-                      register={register("name")}
-                      error={errors.name?.message as string}
-                    />
+                    <input
+                      className="border rounded-lg p-3 w-full focus:outline-none focus:ring-1 focus:ring-green-500"
+                      type="text" value={category.name} />
                   </div>
-                  {/* Submit Button */}
-                  <div className="mt-5">
-                    <button type="submit" disabled={categoryLo} className="w-full  py-3 px-6 bg-green-500 text-white rounded-md shadow-md hover:bg-green-600 focus:outline-none transition font-semibold">
-                      {categoryLo ? "Please Wait" : "Add Customer"}
-                    </button>
-                  </div>
+                  {/* Update Button */}
+                  <SSButton text="Update Category" disabled={isCategoryLoading} type="submit" />
                 </form>
-              </div>} title="Add Category" btnName="Add Category" icon={<IoMdAddCircle />} />
+              </div>} title="Update Category" btnName="Update" icon={<FaEdit />} />
 
-              <button
-                className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition"
+
+              <Popconfirm
+                title="Delete the task"
+                description="Are you sure to delete this task?"
+                okText="Yes"
+                cancelText="No"
+                onConfirm={async () => {
+                  await deleteCategory(category._id);
+                }}
               >
-                <FiEdit />
-                Edit
-              </button>
-              <button
-                className="flex items-center gap-2 px-4 py-2 bg-red-500 text-white text-sm font-medium rounded-lg hover:bg-red-600 transition"
-                onClick={async () => await deleteCategory(category._id)}
-              >
-                <FiTrash />
-                Delete
-              </button>
+                <button
+                  className="flex items-center gap-2 px-4 py-2 bg-red-500 text-white text-sm font-medium rounded-lg hover:bg-red-600 transition"
+                >
+                  <FiTrash />
+                  Delete
+                </button>
+              </Popconfirm>
+
             </div>
           </div>
         ))}

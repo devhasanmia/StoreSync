@@ -16,14 +16,13 @@ const SSModal = ({
   onCancel,
   btnName,
   icon,
+  onConfirm
 }: SSModalProps) => {
   const [open, setOpen] = useState(false);
-
   const handleCancel = () => {
     if (onCancel) onCancel();
     setOpen(false);
   };
-
   const showModal = () => {
     setOpen(true);
   };
@@ -40,6 +39,7 @@ const SSModal = ({
         open={open}
         title={title}
         onCancel={handleCancel}
+        onOk={onConfirm}
         footer={
           <div>
           </div>
