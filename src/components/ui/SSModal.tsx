@@ -8,6 +8,7 @@ interface SSModalProps {
   onCancel?: () => void;
   btnName: string;
   icon: React.ReactNode;
+  bgColor: string
 }
 
 const SSModal = ({
@@ -16,7 +17,8 @@ const SSModal = ({
   onCancel,
   btnName,
   icon,
-  onConfirm
+  onConfirm,
+  bgColor,
 }: SSModalProps) => {
   const [open, setOpen] = useState(false);
   const handleCancel = () => {
@@ -31,7 +33,7 @@ const SSModal = ({
     <div>
       <button
         onClick={showModal}
-        className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 flex gap-2 items-center"
+        className={`px-4 py-2 bg-${bgColor}-500 text-white rounded-md hover:bg-${bgColor}-600 flex gap-2 items-center`}
       >
         {icon} {btnName}
       </button>
@@ -40,12 +42,11 @@ const SSModal = ({
         title={title}
         onCancel={handleCancel}
         onOk={onConfirm}
-        footer={
-          <div>
-          </div>
-        }
+        footer={<div />}
       >
-        <div className="space-y-4">{content}</div>
+        <div className="space-y-4">
+          {content}
+        </div>
       </Modal>
     </div>
   );

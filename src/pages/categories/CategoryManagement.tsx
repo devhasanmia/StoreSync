@@ -1,7 +1,7 @@
-import { FiEdit, FiTrash } from "react-icons/fi";
+import {FiTrash } from "react-icons/fi";
 import { IoMdAddCircle } from "react-icons/io";
 import PageTitle from "../../components/ui/PageTitle";
-import { useAddCategoryMutation, useDeleteCategoryMutation, useGetCategoriesQuery } from "../../redux/api/baseApi";
+import { useAddCategoryMutation, useGetCategoriesQuery } from "../../redux/api/baseApi";
 import SSModal from "../../components/ui/SSModal";
 import SSInput from "../../components/ui/SSInput";
 import { useForm } from "react-hook-form";
@@ -11,12 +11,12 @@ import { format } from 'date-fns';
 import { categoryValidation } from "../../validations/categoryValidation";
 import SSButton from "../../components/ui/SSButton";
 import { FaEdit } from "react-icons/fa";
-import { Popconfirm } from 'antd';
+import SSPopConfirm from "../../components/ui/SSPopConfirm";
 const CategoryManagement = () => {
 
   const { data } = useGetCategoriesQuery("");
   const [addCategory, { isLoading: isCategoryLoading }] = useAddCategoryMutation();
-  const [deleteCategory] = useDeleteCategoryMutation()
+  // const [deleteCategory] = useDeleteCategoryMutation()
 
   const {
     register,
@@ -67,7 +67,7 @@ const CategoryManagement = () => {
             {/* Submit Button */}
             <SSButton text="Add Category" type="submit" disabled={isCategoryLoading} />
           </form>
-        </div>} title="Add Category" btnName="Add Category" icon={<IoMdAddCircle />} />
+        </div>} title="Add Category" btnName="Add Category" icon={<IoMdAddCircle />} bgColor="green" />
       </div>
 
       {/* Grid for Categories */}
@@ -94,28 +94,10 @@ const CategoryManagement = () => {
                       type="text" value={category.name} />
                   </div>
                   {/* Update Button */}
-                  <SSButton text="Update Category" disabled={isCategoryLoading} type="submit" />
+                  <SSButton text="Update Category" disabled={isCategoryLoading} type="submit"  />
                 </form>
-              </div>} title="Update Category" btnName="Update" icon={<FaEdit />} />
-
-
-              <Popconfirm
-                title="Delete the task"
-                description="Are you sure to delete this task?"
-                okText="Yes"
-                cancelText="No"
-                onConfirm={async () => {
-                  await deleteCategory(category._id);
-                }}
-              >
-                <button
-                  className="flex items-center gap-2 px-4 py-2 bg-red-500 text-white text-sm font-medium rounded-lg hover:bg-red-600 transition"
-                >
-                  <FiTrash />
-                  Delete
-                </button>
-              </Popconfirm>
-
+              </div>} title="Update Category" btnName="Update" icon={<FaEdit />} bgColor="green"/>
+              <SSPopConfirm title="Category" name="Delete" icon={<FiTrash/>} bgColor="red" content={<div><SSButton text="Update Category" disabled={isCategoryLoading} type="submit"  /></div>} alartMsg="ssdfsdfds"/>
             </div>
           </div>
         ))}
